@@ -6,7 +6,7 @@ on:
     tags: [ v-* ]
 
 jobs:
-  cd:
+  build:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -27,3 +27,17 @@ jobs:
       run: chmod +x ./entrypoint.sh
     - name: Run program
       run: ./entrypoint.sh
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./public/
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
