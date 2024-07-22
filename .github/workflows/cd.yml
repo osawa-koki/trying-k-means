@@ -5,6 +5,9 @@ on:
   push:
     tags: [ v-* ]
 
+env:
+  python-version: 3.12
+
 permissions:
   contents: read
   pages: write
@@ -17,15 +20,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        python-version: [ "3.12" ]
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python ${{ env.python-version }}
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ env.python-version }}
     - name: Install poetry
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
