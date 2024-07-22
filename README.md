@@ -2,6 +2,8 @@
 
 🥗🥗🥗 PythonでK-meansを実装してみる！  
 
+![成果物](./fruit.gif)  
+
 ## 実行方法
 
 DevContainerに入り、以下のコマンドを実行します。  
